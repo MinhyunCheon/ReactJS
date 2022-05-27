@@ -13,7 +13,7 @@
         // 바닐라 자바스크립트의 경우 HTML -> script -> HTML 순서로 HTML을 수정
         // ReactJS는 자바스크립트에서 시작하며, ReactJS의 핵심이자 강점
         const root = document.getElementById("root");
-        const title = (
+        const Title = () => (
             <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
                 Hello I'm title
             </h3>
@@ -22,7 +22,7 @@
         //     "span"
         //     , {onMouseEnter: () => console.log("mouse enter")}
         //     , "Hello, I'm a span");
-        const button = (
+        const Button = () => (
             <button style={{backgroundColor: "tomato"}} onClick={() => console.log("I'm clicked")}>
                 Click me
             </button>
@@ -30,7 +30,17 @@
         // const btn = React.createElement("button"
         // , {onClick: () => console.log("i'm clicked")}
         // , "Click me");
-        const container = React.createElement("div", null, [title, button]);
-        ReactDOM.render(container, root);
+
+        // Container를 컴포넌트로 바꾸지 않아도 랜더링 가능
+        // 컴포넌트에 대한 추가 이해 필요
+        const Container = () => (
+            <div>
+                {/* 커스텀 컴포넌트의 첫글자는 반드시 대문자여야 한다 */
+                /* 소문자의 경우 HTML 태그와 중복되어 구분할 수 없기 때문 */}
+                <Title />
+                <Button />
+            </div>
+        );
+        ReactDOM.render(<Container />, root);
     </script>
 </html>
