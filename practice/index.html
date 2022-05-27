@@ -10,18 +10,16 @@
     <!-- JSX 형식의 문법을 브라우저가 기본적으로 이해하지 못하기 때문에 Babel을 통해 변환 -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        // 바닐라 자바스크립트의 경우 HTML -> script -> HTML 순서로 HTML을 수정
-        // ReactJS는 자바스크립트에서 시작하며, ReactJS의 핵심이자 강점
         const root = document.getElementById("root");
         const App = () => {
-            const [counter, modifier] = React.useState(0);
+            const [counter, setCounter] = React.useState(0);
             return (
                 <div>
-                    <h3>Total clicks: 0</h3>
-                    <button>Click me</button>
+                    <h3>Total clicks: {counter}</h3>
+                    <button onClick={() => setCounter(counter + 1)}>Click me</button>
                 </div>
-        )};
-
+            )
+        };
         ReactDOM.render(<App />, root);
     </script>
 </html>
