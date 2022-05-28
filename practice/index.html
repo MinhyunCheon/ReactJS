@@ -16,7 +16,12 @@
             return (
                 <div>
                     <h3>Total clicks: {counter}</h3>
-                    <button onClick={() => setCounter(counter + 1)}>Click me</button>
+                    <button onClick={
+                        // 간혹 counter가 다른 곳에서 값이 바뀔 가능성 존재
+                        // () => setCounter(counter + 1)
+                        // 아래 로직은 React가 현재 값을 보장하므로 보다 안전
+                        () => setCounter(current => current + 1)
+                    }>Click me</button>
                 </div>
             )
         };
