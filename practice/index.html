@@ -14,23 +14,31 @@
         // label for, h1 class 등 JS 예약어는 JSX에서 사용할 수 없다.
         // react.production.min.js 버전에서는 오류가 발생하지 않지만, development 버전에서는 오류 발생
         const App = () => {
-            const [minutes, setMinutes] = React.useState();
+            const [minutes, setMinutes] = React.useState(0);
             return (
                 <div>
-                    <h1>Super Converter</h1>
-                    <label htmlFor="minutes">Minutes</label>
-                    <input
-                        id="minutes"
-                        placeholder="Minutes"
-                        type="number"
-                        value={minutes}
-                        onChange={e => {
-                            setMinutes(e.target.value);
-                        }}
-                    />
-                    <h4>You want to convert {minutes}</h4>
-                    <label htmlFor="hours">hours</label>
-                    <input id="hours" placeholder="Hours" type="number" />
+                    <div>
+                        <h1>Super Converter</h1>
+                        <label htmlFor="minutes">Minutes</label>
+                        <input
+                            id="minutes"
+                            placeholder="Minutes"
+                            type="number"
+                            value={minutes}
+                            onChange={e => setMinutes(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="hours">hours</label>
+                        <input
+                            id="hours"
+                            placeholder="Hours"
+                            type="number"
+                            disabled
+                            value={minutes / 60}
+                        />
+                    </div>
+                    <button onClick={() => setMinutes(0)}>Reset</button>
                 </div>
             );
         }
