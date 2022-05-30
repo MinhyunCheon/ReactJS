@@ -11,20 +11,29 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         const root = document.getElementById("root");
+        // label for, h1 class 등 JS 예약어는 JSX에서 사용할 수 없다.
+        // react.production.min.js 버전에서는 오류가 발생하지 않지만, development 버전에서는 오류 발생
         const App = () => {
-            const [counter, setCounter] = React.useState(0);
+            const [minutes, setMinutes] = React.useState();
             return (
                 <div>
-                    <h3>Total clicks: {counter}</h3>
-                    <button onClick={
-                        // 간혹 counter가 다른 곳에서 값이 바뀔 가능성 존재
-                        // () => setCounter(counter + 1)
-                        // 아래 로직은 React가 현재 값을 보장하므로 보다 안전
-                        () => setCounter(current => current + 1)
-                    }>Click me</button>
+                    <h1>Super Converter</h1>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input
+                        id="minutes"
+                        placeholder="Minutes"
+                        type="number"
+                        value={minutes}
+                        onChange={e => {
+                            setMinutes(e.target.value);
+                        }}
+                    />
+                    <h4>You want to convert {minutes}</h4>
+                    <label htmlFor="hours">hours</label>
+                    <input id="hours" placeholder="Hours" type="number" />
                 </div>
-            )
-        };
+            );
+        }
         ReactDOM.render(<App />, root);
     </script>
 </html>
