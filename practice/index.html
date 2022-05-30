@@ -14,23 +14,21 @@
         // label for, h1 class 등 JS 예약어는 JSX에서 사용할 수 없다.
         // react.production.min.js 버전에서는 오류가 발생하지 않지만, development 버전에서는 오류 발생
         const App = () => {
-            const [minutes, setMinutes] = React.useState(0);
-            // State를 추가하지 않고 하나로 처리 가능
-            // const [hours, setHours] = React.useState(0);
-            const [flipped, setFlipped] = React.useState(false);
-            const reset = () => setMinutes(0);
+            const [amount, setAmount] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
+            const reset = () => setAmount(0);
             return (
                 <div>
                     <div>
                         <h1>Super Converter</h1>
-                        <label htmlFor="minutes">Minutes</label>
+                        <label htmlFor="amount">amount</label>
                         <input
-                            id="minutes"
-                            placeholder="Minutes"
+                            id="amount"
+                            placeholder="amount"
                             type="number"
-                            disabled={flipped}
-                            value={!flipped ? minutes : minutes * 60}
-                            onChange={e => setMinutes(e.target.value)}
+                            disabled={inverted}
+                            value={!inverted ? amount : amount * 60}
+                            onChange={e => setAmount(e.target.value)}
                         />
                     </div>
                     <div>
@@ -39,17 +37,17 @@
                             id="hours"
                             placeholder="Hours"
                             type="number"
-                            disabled={!flipped}
-                            value={!flipped ? minutes / 60 : minutes}
-                            onChange={e => setMinutes(e.target.value)}
+                            disabled={!inverted}
+                            value={!inverted ? amount / 60 : amount}
+                            onChange={e => setAmount(e.target.value)}
                         />
                     </div>
                     <button onClick={reset}>Reset</button>
                     <button onClick={() => {
                             reset();
-                            setFlipped(f => !f);
+                            setInverted(f => !f);
                         }
-                    }>Flip</button>
+                    }>{!inverted ? "Invert" : "Turn back"}</button>
                 </div>
             );
         }
