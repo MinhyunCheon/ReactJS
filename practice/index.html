@@ -12,7 +12,7 @@
     <script type="text/babel">
         // function Btn(props) {
         // 아래와 같이 shortcut으로 호출 가능
-        function Btn({text}) {
+        function Btn({text, changeValue}) {
             return (
                 <button
                     style={{
@@ -21,13 +21,16 @@
                         padding: "10px 20px",
                         border: 0,
                         borderRadius: 10,
-                    }}>{text}</button>);
+                    }}
+                    onClick={changeValue}
+                >{text}</button>);
         }
 
         const App = () => {
+            const [value, setValue] = React.useState("Save Changes");
             return (
                 <div>
-                    <Btn text="Save Changes"/>
+                    <Btn text={value} changeValue={() => {setValue("Revert Changes")}} />
                     <Btn text="Confirm"/>
                 </div>
             );
