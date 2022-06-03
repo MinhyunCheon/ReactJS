@@ -12,7 +12,9 @@
     <script type="text/babel">
         // function Btn(props) {
         // 아래와 같이 shortcut으로 호출 가능
-        function Btn({text, changeValue}) {
+        // props는 자동으로 HTML에 포함되지 않으므로 반드시 선언해야 한다.
+        function Btn({text, onClick}) {
+            console.log("1");
             return (
                 <button
                     style={{
@@ -22,16 +24,18 @@
                         border: 0,
                         borderRadius: 10,
                     }}
-                    onClick={changeValue}
+                    onClick={onClick}
                 >{text}</button>);
         }
-
+        const MemorizedBtn = React.memo(Btn);
         const App = () => {
             const [value, setValue] = React.useState("Save Changes");
+            // Btn의 경우 Confirm에 변화가 없지만, 같이 re-render가 된다.
+            // memo()를 통해 감싸면, 이를 방지할 수 있다.
             return (
                 <div>
-                    <Btn text={value} changeValue={() => {setValue("Revert Changes")}} />
-                    <Btn text="Confirm"/>
+                    <MemorizedBtn text={value} onClick={() => {setValue("Revert Changes")}} />
+                    <MemorizedBtn text="Confirm"/>
                 </div>
             );
         }
